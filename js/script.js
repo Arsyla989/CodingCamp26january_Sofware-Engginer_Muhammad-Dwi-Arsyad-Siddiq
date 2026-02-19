@@ -75,3 +75,4 @@ deleteAllBtn.addEventListener("click", function() {
     tasks = [];
     renderTasks();
 });
+ 
