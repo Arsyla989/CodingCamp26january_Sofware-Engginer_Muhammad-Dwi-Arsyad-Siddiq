@@ -1,86 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BlueWave Tech</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <title>Modern Todo List</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="logo">BlueWave</div>
-  <ul class="nav-menu">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#profile">Our Profile</a></li>
-    <li><a href="#contact">Message Us</a></li>
-  </ul>
-</nav>
+<div class="container">
+    <h1>Todo List</h1>
 
-<!-- HOME -->
-<section id="home" class="hero">
-  <div class="hero-text">
-    <h1>Hi, <span id="username">Guest</span> 👋</h1>
-    <p>We build smart digital solutions for your business</p>
-  </div>
-</section>
+    <form id="todoForm">
+        <input type="text" id="taskInput" placeholder="Add a new task..." required>
+        <input type="date" id="dateInput" required>
+        <button type="submit" class="add-btn">+</button>
+    </form>
 
-<!-- PROFILE -->
-<section id="profile" class="profile">
-  <div class="profile-banner">
-    <h2>Our Company</h2>
-  </div>
-
-  <div class="profile-container">
-    <div class="about">
-      <h3>About the Company</h3>
-      <p>
-        BlueWave Tech adalah perusahaan teknologi yang berfokus pada pengembangan
-        website, aplikasi, dan sistem digital untuk membantu bisnis berkembang
-        lebih cepat dan efisien.
-      </p>
+    <div class="actions">
+        <button id="filterBtn">Filter Pending</button>
+        <button id="deleteAllBtn" class="danger">Delete All</button>
     </div>
 
-    <div class="vm-grid">
-      <div class="vm-card">
-        <h4>Vision</h4>
-        <p>
-          Menjadi perusahaan teknologi terpercaya yang memberikan dampak nyata
-          bagi bisnis dan masyarakat.
-        </p>
-      </div>
-
-      <div class="vm-card">
-        <h4>Mission</h4>
-        <ul>
-          <li>Membangun produk digital berkualitas tinggi</li>
-          <li>Mendukung transformasi digital bisnis</li>
-          <li>Memberikan solusi yang efisien dan inovatif</li>
-        </ul>
-      </div>
+    <div class="task-list" id="taskList">
+        <p class="empty">No task found</p>
     </div>
-  </div>
-</section>
-
-<!-- MESSAGE US -->
-<section id="contact" class="contact">
-  <h2>Message Us</h2>
-
-  <form id="contactForm" class="contact-form">
-    <input type="text" id="name" placeholder="Name" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="tel" id="phone" placeholder="Phone Number" />
-    <textarea id="message" placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-
-  <div id="result" class="result"></div>
-</section>
-
-<footer>
-  <p>© 2026 BlueWave Tech. All rights reserved.</p>
-</footer>
+</div>
 
 <script src="js/script.js"></script>
 </body>
