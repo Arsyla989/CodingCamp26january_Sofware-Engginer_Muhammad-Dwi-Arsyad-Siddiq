@@ -1,30 +1,77 @@
-// Greeting name
-const username = prompt("Masukkan nama kamu:");
-if (username) {
-  document.getElementById("username").innerText = username;
+const form = document.getElementById("todoForm");
+const taskInput = document.getElementById("taskInput");
+const dateInput = document.getElementById("dateInput");
+const taskList = document.getElementById("taskList");
+const filterBtn = document.getElementById("filterBtn");
+const deleteAllBtn = document.getElementById("deleteAllBtn");
+
+let tasks = [];
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    if (taskInput.value.trim() === "" || dateInput.value === "") {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    const newTask = {
+        text: taskInput.value,
+        date: dateInput.value,
+        completed: false
+    };
+
+    tasks.push(newTask);
+    renderTasks();
+
+    taskInput.value = "";
+    dateInput.value = "";
+});
+
+function renderTasks(filtered = tasks) {
+    taskList.innerHTML = "";
+
+    if (filtered.length === 0) {
+        taskList.innerHTML = "<p class='empty'>No task found</p>";
+        return;
+    }
+
+    filtered.forEach((task, index) => {
+        const div = document.createElement("div");
+        div.classList.add("task-item");
+        if (task.completed) div.classList.add("completed");
+
+        div.innerHTML = `
+            <div>
+                <span>${task.text}</span><br>
+                <small>${task.date}</small>
+            </div>
+            <div class="task-actions">
+                <button onclick="toggleTask(${index})">✔</button>
+                <button onclick="deleteTask(${index})">X</button>
+            </div>
+        `;
+
+        taskList.appendChild(div);
+    });
 }
 
-// Form validation
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+function toggleTask(index) {
+    tasks[index].completed = !tasks[index].completed;
+    renderTasks();
+}
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const message = document.getElementById("message").value.trim();
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    renderTasks();
+}
 
-  if (!name || !email || !phone || !message) {
-    alert("Semua field wajib diisi!");
-    return;
-  }
+filterBtn.addEventListener("click", function() {
+    const pending = tasks.filter(task => !task.completed);
+    renderTasks(pending);
+});
 
-  document.getElementById("result").innerHTML = `
-    <h3>Message Sent Successfully</h3>
-    <p><b>Name:</b> ${name}</p>
-    <p><b>Email:</b> ${email}</p>
-    <p><b>Phone:</b> ${phone}</p>
-    <p><b>Message:</b> ${message}</p>
-  `;
-
-  this.reset();
+deleteAllBtn.addEventListener("click", function() {
+    tasks = [];
+    renderTasks();
 });
